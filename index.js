@@ -18,16 +18,32 @@ const addMovie = (event) =>{
     inputField.value = '';
 }
 
+
+
 const deleteMovie = (event) => {
+    const listItem = event.target.parentNode;
+    const movieTitle = listItem.querySelector('span').textContent
     event.target.parentNode.remove()
-    message.textContent = 'Movie deleted!'
+    message.textContent = `${movieTitle} removed from list`
+    revealMessage();
 }
 
+
+
 const crossOffMovie = (event) => {
+    const clickedMovie = event.target.textContent
     event.target.classList.toggle('checked')
     if (event.target.classList.contains('checked')){
-        message.textContent = 'Movie Watched!'
-    } else (message.textContent = 'Movie added back.')
+        message.textContent = `${clickedMovie} watched!`
+    } else (message.textContent = `${clickedMovie} added back.`)
+    revealMessage();
+}
+
+const revealMessage = () => {
+    message.classList.remove('hide')
+    setTimeout(function() {
+        message.classList.add('hide');
+    }, 1000)
 }
 
 const form = document.querySelector('form');
